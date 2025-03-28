@@ -1,5 +1,4 @@
-// set bash title
-process.stdout.write("\x1b]2;Goat Bot V2 - Made by NTKhang Fixed by Team Calyx\x1b\x5c");
+process.stdout.write("\x1b]2;SIDDIK BOT - Made by SK SIDDIK KHAN\x1b\x5c");
 const defaultRequire = require;
 
 function decode(text) {
@@ -36,11 +35,11 @@ function compareVersion(version1, version2) {
 	const v2 = version2.split(".");
 	for (let i = 0; i < 3; i++) {
 		if (parseInt(v1[i]) > parseInt(v2[i]))
-			return 1; // version1 > version2
+			return 1; 
 		if (parseInt(v1[i]) < parseInt(v2[i]))
-			return -1; // version1 < version2
+			return -1; 
 	}
-	return 0; // version1 = version2
+	return 0; 
 }
 
 const { writeFileSync, readFileSync, existsSync, watch } = require("fs-extra");
@@ -56,13 +55,10 @@ function centerText(text, length) {
 	const width = process.stdout.columns;
 	const leftPadding = Math.floor((width - (length || text.length)) / 2);
 	const rightPadding = width - leftPadding - (length || text.length);
-	// Build the padded string using the calculated padding values
 	const paddedString = ' '.repeat(leftPadding > 0 ? leftPadding : 0) + text + ' '.repeat(rightPadding > 0 ? rightPadding : 0);
-	// Print the padded string to the terminal
 	console.log(paddedString);
 }
 
-// logo
 const titles = [
 	[
 		"██████╗  ██████╗  █████╗ ████████╗    ██╗   ██╗██████╗",
@@ -77,10 +73,10 @@ const titles = [
 		"█▄█ █▄█ █▀█ ░█░  █▄█ █▄█ ░█░  ▀▄▀ █▄"
 	],
 	[
-		"G O A T B O T  V 2 @" + currentVersion
+		"S I D D I K - B O T" + currentVersion
 	],
 	[
-		"GOATBOT V2"
+		"SIDDIK-BOT-07"
 	]
 ];
 const maxWidth = process.stdout.columns;
@@ -112,9 +108,9 @@ if (subTitle.length > maxWidth) {
 else {
 	subTitleArray.push(subTitle);
 }
-const author = ("Created by NTKhang with ♡");
-const srcUrl = ("Source code: https://github.com/ntkhang03/Goat-Bot-V2");
-const fakeRelease = ("ALL VERSIONS NOT RELEASED HERE ARE FAKE");
+const author = ("Created by SK SIDDIK with ♡");
+const srcUrl = ("Source code: https://github.com/SK-SIDDIK/SIDDIK-BOT-V2");
+const fakeRelease = ("SK SIDDIK PROJECT ALL VERSIONS NOT RELEASED HERE ARE FAKE");
 for (const t of subTitleArray) {
 	const textColor2 = gradient("#9F98E8", "#AFF6CF")(t);
 	centerText(textColor2, t.length);
@@ -162,13 +158,9 @@ async function input(prompt, isPassword = false) {
 
 	if (isPassword)
 		rl.input.on("keypress", function () {
-			// get the number of characters entered so far:
 			const len = rl.line.length;
-			// move cursor back to the beginning of the input:
 			readline.moveCursor(rl.output, -len, 0);
-			// clear everything to the right of the cursor:
 			readline.clearLine(rl.output, 1);
-			// replace the original input with asterisks:
 			for (let i = 0; i < len; i++) {
 				rl.output.write("*");
 			}
@@ -197,7 +189,6 @@ qr.readQrCode = async function (filePath) {
 };
 
 const { dirAccount } = global.client;
-// const { config, configCommands } = global.GoatBot;
 const { facebookAccount } = global.GoatBot.config;
 
 function responseUptimeSuccess(req, res) {
@@ -254,13 +245,13 @@ async function getAppStateFromEmail(spin = { _start: () => { }, _stop: () => { }
 				await (async function submitCode(message) {
 					if (message && isExit) {
 						spin._stop();
-						log.error("LOGIN FACEBOOK", message);
+						log.error("SIDDIK LOGIN FACEBOOK", message);
 						process.exit();
 					}
 
 					if (message) {
 						spin._stop();
-						log.warn("LOGIN FACEBOOK", message);
+						log.warn("SIDDIK LOGIN FACEBOOK", message);
 					}
 
 					if (facebookAccount["2FASecret"] && tryNumber == 0) {
@@ -354,7 +345,6 @@ function isNetScapeCookie(cookie) {
 	if (typeof cookie !== 'string')
 		return false;
 	return /(.+)\t(1|TRUE|true)\t([\w\/.-]*)\t(1|TRUE|true)\t\d+\t([\w-]+)\t(.+)/i.test(cookie);
-	// match
 }
 
 function netScapeToCookies(cookieData) {
@@ -401,12 +391,11 @@ async function getAppStateToLogin(loginWithEmail) {
 	if (loginWithEmail)
 		return await getAppStateFromEmail(undefined, facebookAccount);
 	if (!existsSync(dirAccount))
-		return log.error("LOGIN FACEBOOK", getText('login', 'notFoundDirAccount', colors.green(dirAccount)));
+		return log.error("SIDDIK LOGIN FACEBOOK", getText('login', 'notFoundDirAccount', colors.green(dirAccount)));
 	const accountText = readFileSync(dirAccount, "utf8");
 
 	try {
 		const splitAccountText = accountText.replace(/\|/g, '\n').split('\n').map(i => i.trim()).filter(i => i);
-		// is token full permission
 		if (accountText.startsWith('EAAAA')) {
 			try {
 				spin = createOraDots(getText('login', 'loginToken'));
@@ -414,11 +403,10 @@ async function getAppStateToLogin(loginWithEmail) {
 				appState = await require('./getFbstate.js')(accountText);
 			}
 			catch (err) {
-				err.name = "TOKEN_ERROR";
+				err.name = "SIDDIK TOKEN_ERROR";
 				throw err;
 			}
 		}
-		// is cookie string
 		else {
 			if (accountText.match(/^(?:\s*\w+\s*=\s*[^;]*;?)+/)) {
 				spin = createOraDots(getText('login', 'loginCookieString'));
@@ -438,7 +426,6 @@ async function getAppStateToLogin(loginWithEmail) {
 					})
 					.filter(i => i.key && i.value && i.key != "x-referer");
 			}
-			// is netscape cookie
 			else if (isNetScapeCookie(accountText)) {
 				spin = createOraDots(getText('login', 'loginCookieNetscape'));
 				spin._start();
@@ -448,7 +435,6 @@ async function getAppStateToLogin(loginWithEmail) {
 				(splitAccountText.length == 2 || splitAccountText.length == 3) &&
 				!splitAccountText.slice(0, 2).map(i => i.trim()).some(i => i.includes(' '))
 			) {
-				// bug if account.txt is "[]"
 				global.GoatBot.config.facebookAccount.email = splitAccountText[0]; // bug here=> email is "["
 				global.GoatBot.config.facebookAccount.password = splitAccountText[1]; // bug here=> password is "]"
 				if (splitAccountText[2]) {
@@ -457,7 +443,6 @@ async function getAppStateToLogin(loginWithEmail) {
 				}
 				writeFileSync(global.client.dirConfig, JSON.stringify(global.GoatBot.config, null, 2));
 			}
-			// is json (cookies or appstate)
 			else {
 				try {
 					spin = createOraDots(getText('login', 'loginCookieArray'));
@@ -477,7 +462,7 @@ async function getAppStateToLogin(loginWithEmail) {
 					});
 				else if (!appState.some(i => i.key)) {
 					const error = new Error(`${path.basename(dirAccount)} is invalid`);
-					error.name = "ACCOUNT_ERROR";
+					error.name = "SIDDIK ACCOUNT_ERROR";
 					throw error;
 				}
 				appState = appState
@@ -491,11 +476,11 @@ async function getAppStateToLogin(loginWithEmail) {
 					}))
 					.filter(i => i.key && i.value && i.key != "x-referer");
 			}
-			/*if (!await checkLiveCookie(appState.map(i => i.key + "=" + i.value).join("; "), facebookAccount.userAgent)) {
+			if (!await checkLiveCookie(appState.map(i => i.key + "=" + i.value).join("; "), facebookAccount.userAgent)) {
 				const error = new Error("Cookie is invalid");
-				error.name = "COOKIE_INVALID";
+				error.name = "SIDDIK COOKIE_INVALID";
 				throw error;
-			}*/
+			}
 		}
 	}
 	catch (err) {
@@ -504,13 +489,13 @@ async function getAppStateToLogin(loginWithEmail) {
 			email,
 			password
 		} = facebookAccount;
-		if (err.name === "TOKEN_ERROR")
-			log.err("LOGIN FACEBOOK", getText('login', 'tokenError', colors.green("EAAAA..."), colors.green(dirAccount)));
-		else if (err.name === "COOKIE_INVALID")
-			log.err("LOGIN FACEBOOK", getText('login', 'cookieError'));
+		if (err.name === "SIDDIK TOKEN_ERROR")
+			log.err("SIDDIK LOGIN FACEBOOK", getText('login', 'tokenError', colors.green("EAAAA..."), colors.green(dirAccount)));
+		else if (err.name === "SIDDIK COOKIE_INVALID")
+			log.err("SIDDIK LOGIN FACEBOOK", getText('login', 'cookieError'));
 
 		if (!email || !password) {
-			log.warn("LOGIN FACEBOOK", getText('login', 'cannotFindAccount'));
+			log.warn("SIDDIK LOGIN FACEBOOK", getText('login', 'cannotFindAccount'));
 			const rl = readline.createInterface({
 				input: process.stdin,
 				output: process.stdout
@@ -526,7 +511,7 @@ async function getAppStateToLogin(loginWithEmail) {
 				const character = '>';
 				function showOptions() {
 					rl.output.write(`\r${options.map((option, index) => index === currentOption ? colors.blueBright(`${character} (${index + 1}) ${option}`) : `  (${index + 1}) ${option}`).join('\n')}\u001B`);
-					rl.write('\u001B[?25l'); // hides cursor
+					rl.write('\u001B[?25l'); 
 				}
 				rl.input.on('keypress', (_, key) => {
 					if (key.name === 'up') {
@@ -539,7 +524,7 @@ async function getAppStateToLogin(loginWithEmail) {
 						const number = parseInt(key.name);
 						if (number >= 0 && number <= options.length)
 							currentOption = number - 1;
-						process.stdout.write('\033[1D'); // delete the character
+						process.stdout.write('\033[1D'); 
 					}
 					else if (key.name === 'enter' || key.name === 'return') {
 						rl.input.removeAllListeners('keypress');
@@ -549,7 +534,7 @@ async function getAppStateToLogin(loginWithEmail) {
 						resolve();
 					}
 					else {
-						process.stdout.write('\033[1D'); // delete the character
+						process.stdout.write('\033[1D'); 
 					}
 
 					clearLines(options.length);
@@ -558,9 +543,9 @@ async function getAppStateToLogin(loginWithEmail) {
 				showOptions();
 			});
 
-			rl.write('\u001B[?25h\n'); // show cursor 
+			rl.write('\u001B[?25h\n'); 
 			clearLines(options.length + 1);
-			log.info("LOGIN FACEBOOK", getText('login', 'loginWith', options[currentOption]));
+			log.info("SIDDIK LOGIN FACEBOOK", getText('login', 'loginWith', options[currentOption]));
 
 			if (currentOption == 0) {
 				email = await input(`${getText('login', 'inputEmail')} `);
@@ -586,8 +571,8 @@ async function getAppStateToLogin(loginWithEmail) {
 			return await getAppStateToLogin();
 		}
 
-		log.info("LOGIN FACEBOOK", getText('login', 'loginPassword'));
-		log.info("ACCOUNT INFO", `Email: ${facebookAccount.email}, I_User: ${facebookAccount.i_user || "(empty)"}`);
+		log.info("SIDDIK LOGIN FACEBOOK", getText('login', 'loginPassword'));
+		log.info("SIDDIK ACCOUNT INFO", `Email: ${facebookAccount.email}, I_User: ${facebookAccount.i_user || "(empty)"}`);
 		spin = createOraDots(getText('login', 'loginPassword'));
 		spin._start();
 
@@ -597,7 +582,7 @@ async function getAppStateToLogin(loginWithEmail) {
 		}
 		catch (err) {
 			spin._stop();
-			log.err("LOGIN FACEBOOK", getText('login', 'loginError'), err.message, err);
+			log.err("SIDDIK LOGIN FACEBOOK", getText('login', 'loginError'), err.message, err);
 			process.exit();
 		}
 	}
@@ -609,7 +594,6 @@ function stopListening(keyListen) {
 	return new Promise((resolve) => {
 		global.GoatBot.fcaApi.stopListening?.(() => {
 			if (callbackListenTime[keyListen]) {
-				// callbackListenTime[keyListen || Object.keys(callbackListenTime).pop()]("Connection closed by user.");
 				callbackListenTime[keyListen] = () => { };
 			}
 			resolve();
@@ -617,27 +601,19 @@ function stopListening(keyListen) {
 	});
 }
 
-// function removeListener(keyListen) {
-// 	keyListen = keyListen || Object.keys(callbackListenTime).pop();
-// 	if (callbackListenTime[keyListen])
-// 		callbackListenTime[keyListen] = () => { };
-// }
-
 async function startBot(loginWithEmail) {
 	console.log(colors.hex("#f5ab00")(createLine("START LOGGING IN", true)));
 	const currentVersion = require("../../package.json").version;
-	const tooOldVersion = (await axios.get("https://raw.githubusercontent.com/ntkhang03/Goat-Bot-V2-Storage/main/tooOldVersions.txt")).data || "0.0.0";
-	// nếu version cũ hơn
+	const tooOldVersion = (await axios.get("https://raw.githubusercontent.com/SK-SIDDIK/Siddik-Bot-Storage/refs/heads/main/tooOldVersions.txt")).data || "0.0.0";
 	if ([-1, 0].includes(compareVersion(currentVersion, tooOldVersion))) {
-		log.err("VERSION", getText('version', 'tooOldVersion', colors.yellowBright('node update')));
+		log.err("SIDDIK BOT VERSION", getText('version', 'tooOldVersion', colors.yellowBright('node update')));
 		process.exit();
 	}
-	/* { CHECK ORIGIN CODE } */
 
 	if (global.GoatBot.Listening)
 		await stopListening();
 
-	log.info("LOGIN FACEBOOK", getText('login', 'currentlyLogged'));
+	log.info("SIDDIK LOGIN FACEBOOK", getText('login', 'currentlyLogged'));
 
 	let appState = await getAppStateToLogin(loginWithEmail);
 	changeFbStateByCode = true;
@@ -665,10 +641,10 @@ async function startBot(loginWithEmail) {
 			if (!isNaN(facebookAccount.intervalGetNewCookie) && facebookAccount.intervalGetNewCookie > 0)
 				if (facebookAccount.email && facebookAccount.password) {
 					spin?._stop();
-					log.info("REFRESH COOKIE", getText('login', 'refreshCookieAfter', convertTime(facebookAccount.intervalGetNewCookie * 60 * 1000, true)));
+					log.info("SIDDIK REFRESH COOKIE", getText('login', 'refreshCookieAfter', convertTime(facebookAccount.intervalGetNewCookie * 60 * 1000, true)));
 					setTimeout(async function refreshCookie() {
 						try {
-							log.info("REFRESH COOKIE", getText('login', 'refreshCookie'));
+							log.info("SIDDIK REFRESH COOKIE", getText('login', 'refreshCookie'));
 							const appState = await getAppStateFromEmail(undefined, facebookAccount);
 							if (facebookAccount.i_user)
 								pushI_user(appState, facebookAccount.i_user);
@@ -686,13 +662,12 @@ async function startBot(loginWithEmail) {
 				}
 				else {
 					spin?._stop();
-					log.warn("REFRESH COOKIE", getText('login', 'refreshCookieWarning'));
+					log.warn("SIDDIK REFRESH COOKIE", getText('login', 'refreshCookieWarning'));
 				}
 			spin ? spin._stop() : null;
 
-			// Handle error
 			if (error) {
-				log.err("LOGIN FACEBOOK", getText('login', 'loginError'), error);
+				log.err("SIDDIK LOGIN FACEBOOK", getText('login', 'loginError'), error);
 				global.statusAccountBot = 'can\'t login';
 				if (facebookAccount.email && facebookAccount.password) {
 					return startBot(true);
@@ -701,10 +676,10 @@ async function startBot(loginWithEmail) {
 				if (global.GoatBot.config.dashBoard?.enable == true) {
 					try {
 						await require("../../dashboard/app.js")(null);
-						log.info("DASHBOARD", getText('login', 'openDashboardSuccess'));
+						log.info("SIDDIK DASHBOARD", getText('login', 'openDashboardSuccess'));
 					}
 					catch (err) {
-						log.err("DASHBOARD", getText('login', 'openDashboardError'), err);
+						log.err("SIDDIK DASHBOARD", getText('login', 'openDashboardError'), err);
 					}
 					return;
 				}
@@ -715,22 +690,21 @@ async function startBot(loginWithEmail) {
 
 			global.GoatBot.fcaApi = api;
 			global.GoatBot.botID = api.getCurrentUserID();
-			log.info("LOGIN FACEBOOK", getText('login', 'loginSuccess'));
+			log.info("SIDDIK LOGIN FACEBOOK", getText('login', 'loginSuccess'));
 			let hasBanned = false;
 			global.botID = api.getCurrentUserID();
 			logColor("#f5ab00", createLine("BOT INFO"));
-			log.info("NODE VERSION", process.version);
-			log.info("PROJECT VERSION", currentVersion);
-			log.info("BOT ID", `${global.botID} - ${await getName(global.botID)}`);
-			log.info("PREFIX", global.GoatBot.config.prefix);
-			log.info("LANGUAGE", global.GoatBot.config.language);
-			log.info("BOT NICK NAME", global.GoatBot.config.nickNameBot || "GOAT BOT");
+			log.info("SK SIDDIK KHAN NODE VERSION", process.version);
+			log.info("SK SIDDIK KHAN PROJECT VERSION", currentVersion);
+			log.info("SK SIDDIK KHAN BOT ID", `${global.botID} - ${await getName(global.botID)}`);
+			log.info("SK SIDDIK KHAN PREFIX", global.GoatBot.config.prefix);
+			log.info("SK SIDDIK KHAN LANGUAGE", global.GoatBot.config.language);
+			log.info("SK SIDDIK KHAN BOT NICK NAME", global.GoatBot.config.nickNameBot || "SIDDIK BOT");
 			// ———————————————————— GBAN ————————————————————— //
 			let dataGban;
 
 			try {
-				// convert to promise
-				const item = await axios.get("https://raw.githubusercontent.com/Savage-Army/gban/refs/heads/main/gban.json");
+				const item = await axios.get("https://raw.githubusercontent.com/SK-SIDDIK/Siddik-Bot-V2-Gban/refs/heads/master/gban.json");
 				dataGban = item.data;
 
 				// ————————————————— CHECK BOT ————————————————— //
@@ -775,7 +749,7 @@ async function startBot(loginWithEmail) {
 			// ———————————————— NOTIFICATIONS ———————————————— //
 			let notification;
 			try {
-				const getNoti = await axios.get("https://raw.githubusercontent.com/ntkhang03/Goat-Bot-V2-Gban/master/notification.txt");
+				const getNoti = await axios.get("https://raw.githubusercontent.com/SK-SIDDIK/Siddik-Bot-V2-Gban/refs/heads/master/notification.txt");
 				notification = getNoti.data;
 			}
 			catch (err) {
@@ -786,10 +760,10 @@ async function startBot(loginWithEmail) {
 				changeFbStateByCode = true;
 				try {
 					writeFileSync(dirAccount, JSON.stringify(filterKeysAppState(api.getAppState()), null, 2));
-					log.info("REFRESH FBSTATE", getText('login', 'refreshFbstateSuccess', path.basename(dirAccount)));
+					log.info("SIDDIK REFRESH FBSTATE", getText('login', 'refreshFbstateSuccess', path.basename(dirAccount)));
 				}
 				catch (err) {
-					log.warn("REFRESH FBSTATE", getText('login', 'refreshFbstateError', path.basename(dirAccount)), err);
+					log.warn("SIDDIK REFRESH FBSTATE", getText('login', 'refreshFbstateError', path.basename(dirAccount)), err);
 				}
 				setTimeout(() => changeFbStateByCode = false, 1000);
 			}
@@ -823,12 +797,12 @@ async function startBot(loginWithEmail) {
 
 								const infoLoad = global.utils.loadScripts("cmds", filename, log, global.GoatBot.configCommands, api, threadModel, userModel, dashBoardModel, globalModel, threadsData, usersData, dashBoardData, globalData);
 								if (infoLoad.status == "success")
-									log.master("AUTO LOAD SCRIPTS", `Command ${filename}.js (${infoLoad.command.config.name}) has been reloaded`);
+									log.master("SIDDIK AUTO LOAD SCRIPTS", `Command ${filename}.js (${infoLoad.command.config.name}) has been reloaded`);
 								else
-									log.err("AUTO LOAD SCRIPTS", `Error when reload command ${filename}.js`, infoLoad.error);
+									log.err("SIDDIK AUTO LOAD SCRIPTS", `Error when reload command ${filename}.js`, infoLoad.error);
 							}
 							catch (err) {
-								log.err("AUTO LOAD SCRIPTS", `Error when reload command ${filename}.js`, err);
+								log.err("SIDDIK AUTO LOAD SCRIPTS", `Error when reload command ${filename}.js`, err);
 							}
 						}
 					}
@@ -849,12 +823,12 @@ async function startBot(loginWithEmail) {
 
 								const infoLoad = global.utils.loadScripts("events", filename, log, global.GoatBot.configCommands, api, threadModel, userModel, dashBoardModel, globalModel, threadsData, usersData, dashBoardData, globalData);
 								if (infoLoad.status == "success")
-									log.master("AUTO LOAD SCRIPTS", `Event ${filename}.js (${infoLoad.command.config.name}) has been reloaded`);
+									log.master("SIDDIK AUTO LOAD SCRIPTS", `Event ${filename}.js (${infoLoad.command.config.name}) has been reloaded`);
 								else
-									log.err("AUTO LOAD SCRIPTS", `Error when reload event ${filename}.js`, infoLoad.error);
+									log.err("SIDDIK AUTO LOAD SCRIPTS", `Error when reload event ${filename}.js`, infoLoad.error);
 							}
 							catch (err) {
-								log.err("AUTO LOAD SCRIPTS", `Error when reload event ${filename}.js`, err);
+								log.err("SIDDIK AUTO LOAD SCRIPTS", `Error when reload event ${filename}.js`, err);
 							}
 						}
 					}
@@ -862,14 +836,14 @@ async function startBot(loginWithEmail) {
 			}
 			// ——————————————————— DASHBOARD ——————————————————— //
 			if (global.GoatBot.config.dashBoard?.enable == true && dashBoardIsRunning == false) {
-				logColor('#f5ab00', createLine('DASHBOARD'));
+				logColor('#f5ab00', createLine('SIDDIK DASHBOARD'));
 				try {
 					await require("../../dashboard/app.js")(api);
-					log.info("DASHBOARD", getText('login', 'openDashboardSuccess'));
+					log.info("SIDDIK DASHBOARD", getText('login', 'openDashboardSuccess'));
 					dashBoardIsRunning = true;
 				}
 				catch (err) {
-					log.err("DASHBOARD", getText('login', 'openDashboardError'), err);
+					log.err("SIDDIK DASHBOARD", getText('login', 'openDashboardError'), err);
 				}
 			}
 			// ———————————————————— ADMIN BOT ———————————————————— //
@@ -881,19 +855,19 @@ async function startBot(loginWithEmail) {
 			for (const uid of adminBot) {
 				try {
 					const userName = await usersData.getName(uid);
-					log.master("ADMINBOT", `[${++i}] ${uid} | ${userName}`);
+					log.master("SIDDIK ADMINBOT", `[${++i}] ${uid} | ${userName}`);
 				}
 				catch (e) {
-					log.master("ADMINBOT", `[${++i}] ${uid}`);
+					log.master("SIDDIK ADMINBOT", `[${++i}] ${uid}`);
 				}
 			}
-			log.master("NOTIFICATION", (notification || "").trim());
-			log.master("SUCCESS", getText('login', 'runBot'));
-			log.master("LOAD TIME", `${convertTime(Date.now() - global.GoatBot.startTime)}`);
+			log.master("SK SIDDIK KHAN NOTIFICATION", (notification || "").trim());
+			log.master("SK SIDDIK KHAN SUCCESS", getText('login', 'runBot'));
+			log.master("SK SIDDIK KHAN LOAD TIME", `${convertTime(Date.now() - global.GoatBot.startTime)}`);
 			logColor("#f5ab00", createLine("COPYRIGHT"));
 			// —————————————————— COPYRIGHT INFO —————————————————— //
-			// console.log(`\x1b[1m\x1b[33mCOPYRIGHT:\x1b[0m\x1b[1m\x1b[37m \x1b[0m\x1b[1m\x1b[36mProject GoatBot v2 created by ntkhang03 (https://github.com/ntkhang03), please do not sell this source code or claim it as your own. Thank you!\x1b[0m`);
-			console.log(`\x1b[1m\x1b[33m${("COPYRIGHT:")}\x1b[0m\x1b[1m\x1b[37m \x1b[0m\x1b[1m\x1b[36m${("Project GoatBot v2 created by ntkhang03 (https://github.com/ntkhang03), please do not sell this source code or claim it as your own. Thank you!")}\x1b[0m`);
+			// console.log(`\x1b[1m\x1b[33mCOPYRIGHT:\x1b[0m\x1b[1m\x1b[37m \x1b[0m\x1b[1m\x1b[36mProject SIDDIK BOT created by SK SIDDIK KHAN (https://github.com/SK-SIDDIK), please do not sell this source code or claim it as your own. Thank you!\x1b[0m`);
+			console.log(`\x1b[1m\x1b[33m${("COPYRIGHT:")}\x1b[0m\x1b[1m\x1b[37m \x1b[0m\x1b[1m\x1b[36m${("Project SIDDIK BOT created by SK SIDDIK KHAN (https://github.com/SK-SIDDIK), please do not sell this source code or claim it as your own. Thank you!")}\x1b[0m`);
 			logColor("#f5ab00", character);
 			global.GoatBot.config.adminBot = adminBot;
 			writeFileSync(global.client.dirConfig, JSON.stringify(global.GoatBot.config, null, 2));
@@ -907,11 +881,11 @@ async function startBot(loginWithEmail) {
 				if (error) {
 					global.responseUptimeCurrent = responseUptimeError;
 					if (
-						error.error == "Not logged in" ||
-						error.error == "Not logged in." ||
-						error.error == "Connection refused: Server unavailable"
+						error.error == "Siddik Not logged in" ||
+						error.error == "Siddik Not logged in." ||
+						error.error == "Siddik Connection refused: Server unavailable"
 					) {
-						log.err("NOT LOGGEG IN", getText('login', 'notLoggedIn'), error);
+						log.err("SIDDIK NOT LOGGEG IN", getText('login', 'notLoggedIn'), error);
 						global.responseUptimeCurrent = responseUptimeError;
 						global.statusAccountBot = 'can\'t login';
 						if (!isSendNotiErrorMessage) {
@@ -922,16 +896,10 @@ async function startBot(loginWithEmail) {
 						if (global.GoatBot.config.autoRestartWhenListenMqttError)
 							process.exit(2);
 						else {
-							// log.dev("ACCOUNT LOCKED, start relogin...");
-							// await stopListening();
-							// log.dev("STOP LISTENING SUCCESS");
 							const keyListen = Object.keys(callbackListenTime).pop();
 							if (callbackListenTime[keyListen])
 								callbackListenTime[keyListen] = () => { };
 							const cookieString = appState.map(i => i.key + "=" + i.value).join("; ");
-							// log.dev("GET COOKIE SUCCESS");
-							// log.dev(cookieString);
-
 							let times = 5;
 
 							const spin = createOraDots(getText('login', 'retryCheckLiveCookie', times));
@@ -964,7 +932,7 @@ async function startBot(loginWithEmail) {
 					}
 					else {
 						await handlerWhenListenHasError({ api, threadModel, userModel, dashBoardModel, globalModel, threadsData, usersData, dashBoardData, globalData, error });
-						return log.err("LISTEN_MQTT", getText('login', 'callBackError'), error);
+						return log.err("SIDDIK LISTEN_MQTT", getText('login', 'callBackError'), error);
 					}
 				}
 				global.responseUptimeCurrent = responseUptimeSuccess;
@@ -973,42 +941,14 @@ async function startBot(loginWithEmail) {
 				if (isSendNotiErrorMessage == true)
 					isSendNotiErrorMessage = false;
 
-				// "whiteListMode": {
-				// 	"enable": false,
-				// 	"whiteListIds": [],
-				// 	"notes": "if you enable this feature, only the ids in the whiteListIds list can use the bot"
-				// },
-				// "whiteListModeThread": {
-				// 	"enable": false,
-				// 	"whiteListThreadIds": [],
-				// 	"notes": "if you enable this feature, only the thread in the whiteListThreadIds list can use the bot",
-				// 	"how_it_work": "if you enable both whiteListMode and whiteListModeThread, the system will check if the user is in whiteListIds, then check if the thread is in whiteListThreadIds, if one of the conditions is true, the user can use the bot"
-				// },
-
-				// "if you enable both whiteListMode and whiteListModeThread, the system will check if the user is in whiteListIds, then check if the thread is in whiteListThreadIds, if one of the conditions is true, the user can use the bot"
-				// const whitelistMode = config.whiteListMode?.enable === true;
-				// const whitelistModeThread = config.whiteListModeThread?.enable === true;
-				// const isWhitelistedSender = config.whiteListMode?.whiteListIds.includes(event.senderID);
-				// const isWhitelistedThread = config.whiteListModeThread?.whiteListThreadIds.includes(event.threadID);
-
-				// if (
-				// 	(whitelistMode && whitelistModeThread && !isWhitelistedSender && !isWhitelistedThread) ||
-				// 	(whitelistMode && !isWhitelistedSender) ||
-				// 	(whitelistModeThread && !isWhitelistedThread)
-				// ) {
-				// 	return;
-				// }
-
 				if (
 					global.GoatBot.config.whiteListMode?.enable == true
 					&& global.GoatBot.config.whiteListModeThread?.enable == true
-					// admin
 					&& !global.GoatBot.config.adminBot.includes(event.senderID)
 				) {
 					if (
 						!global.GoatBot.config.whiteListMode.whiteListIds.includes(event.senderID)
 						&& !global.GoatBot.config.whiteListModeThread.whiteListThreadIds.includes(event.threadID)
-						// admin
 						&& !global.GoatBot.config.adminBot.includes(event.senderID)
 					)
 						return;
@@ -1016,19 +956,16 @@ async function startBot(loginWithEmail) {
 				else if (
 					global.GoatBot.config.whiteListMode?.enable == true
 					&& !global.GoatBot.config.whiteListMode.whiteListIds.includes(event.senderID)
-					// admin
 					&& !global.GoatBot.config.adminBot.includes(event.senderID)
 				)
 					return;
 				else if (
 					global.GoatBot.config.whiteListModeThread?.enable == true
 					&& !global.GoatBot.config.whiteListModeThread.whiteListThreadIds.includes(event.threadID)
-					// admin
 					&& !global.GoatBot.config.adminBot.includes(event.senderID)
 				)
 					return;
 
-				// check if listenMqtt loop
 				if (event.messageID && event.type == "message") {
 					if (storage5Message.includes(event.messageID))
 						Object.keys(callbackListenTime).slice(0, -1).forEach(key => {
@@ -1041,7 +978,6 @@ async function startBot(loginWithEmail) {
 				}
 
 				if (configLog.disableAll === false && configLog[event.type] !== false) {
-					// hide participantIDs (it is array too long)
 					const participantIDs_ = [...event.participantIDs || []];
 					if (event.participantIDs)
 						event.participantIDs = 'Array(' + event.participantIDs.length + ')';
@@ -1088,7 +1024,7 @@ async function startBot(loginWithEmail) {
 				const express = require('express');
 				const app = express();
 				const server = http.createServer(app);
-				const { data: html } = await axios.get("https://raw.githubusercontent.com/ntkhang03/resources-goat-bot/master/homepage/home.html");
+				const { data: html } = await axios.get("https://raw.githubusercontent.com/SK-SIDDIK/resources-siddik-bot/refs/heads/master/homepage/home.html");
 				const PORT = global.GoatBot.config.dashBoard?.port || (!isNaN(global.GoatBot.config.serverUptime.port) && global.GoatBot.config.serverUptime.port) || 3001;
 				app.get('/', (req, res) => res.send(html));
 				app.get('/uptime', global.responseUptimeCurrent);
@@ -1115,8 +1051,8 @@ async function startBot(loginWithEmail) {
 			// ———————————————————— RESTART LISTEN ———————————————————— //
 			if (restartListenMqtt.enable == true) {
 				if (restartListenMqtt.logNoti == true) {
-					log.info("LISTEN_MQTT", getText('login', 'restartListenMessage', convertTime(restartListenMqtt.timeRestart, true)));
-					log.info("BOT_STARTED", getText('login', 'startBotSuccess'));
+					log.info("SIDDIK LISTEN_MQTT", getText('login', 'restartListenMessage', convertTime(restartListenMqtt.timeRestart, true)));
+					log.info("SIDDIK BOT_STARTED", getText('login', 'startBotSuccess'));
 
 					logColor("#f5ab00", character);
 				}
@@ -1129,10 +1065,10 @@ async function startBot(loginWithEmail) {
 						await stopListening();
 						await sleep(1000);
 						global.GoatBot.Listening = api.listenMqtt(createCallBackListen());
-						log.info("LISTEN_MQTT", getText('login', 'restartListenMessage2'));
+						log.info("SIDDIK LISTEN_MQTT", getText('login', 'restartListenMessage2'));
 					}
 					catch (e) {
-						log.err("LISTEN_MQTT", getText('login', 'restartListenMessageError'), e);
+						log.err("SIDDIK LISTEN_MQTT", getText('login', 'restartListenMessageError'), e);
 					}
 				}, restartListenMqtt.timeRestart);
 				global.intervalRestartListenMqtt = restart;
@@ -1147,9 +1083,7 @@ async function startBot(loginWithEmail) {
 				if (type == 'change' && changeFbStateByCode == false && latestChangeContentAccount != fs.statSync(dirAccount).mtimeMs) {
 					clearInterval(global.intervalRestartListenMqtt);
 					global.compulsoryStopLisening = true;
-					// await stopListening();
 					latestChangeContentAccount = fs.statSync(dirAccount).mtimeMs;
-					// process.exit(2);
 					startBot();
 				}
 			});
